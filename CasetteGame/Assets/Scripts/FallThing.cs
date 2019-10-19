@@ -9,14 +9,20 @@ interface ICatchable
 
 public class FallThing : MonoBehaviour, ICatchable
 {
+    [SerializeField] Sprite[] sprites;
     [SerializeField] int points;
     public float moveSpeed;
 
     public Color _myColor;
+    TrailRenderer trail;
 
     void Start()
     {
+        GetComponent<UnityEngine.UI.Image>().sprite = sprites[Random.Range(0, sprites.Length)];
         GetComponent<UnityEngine.UI.Image>().color = _myColor;
+
+        trail = GetComponentInChildren<TrailRenderer>();
+        trail.startColor = _myColor;
     }
 
     void Update()
@@ -42,7 +48,7 @@ public class FallThing : MonoBehaviour, ICatchable
             //GameManager.Instance.Damage();
             StartCoroutine(GameManager.Instance.CameraShake(.1f, .01f));
             GameManager.Instance.objects.Remove(this);
-            Destroy(this.gameObject, 2);
+            Destroy(this.gameObject);
         }
     }
 

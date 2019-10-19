@@ -43,6 +43,9 @@ public class GameManager : MonoBehaviour
         spawner = FindObjectOfType<Spawner>();
         player = FindObjectOfType<Casette>();
         spawner.enemySpeed = moveSpeed;
+
+        scoreText.text = score.ToString();
+        highscoreText.text = highScore.ToString();
     }
 
     private void Update()
@@ -60,11 +63,11 @@ public class GameManager : MonoBehaviour
 
         score += points;
 
-        scoreText.text = "Score: " + score.ToString();
-        highscoreText.text = "Highscore: " + highScore.ToString();
+        scoreText.text = score.ToString();
+        highscoreText.text = highScore.ToString();
 
         moveSpeed += speedMultiplier;
-        player.moveSpeed += speedMultiplier/10f;
+        player.maxMoveSpeed += speedMultiplier/10f;
 
         foreach (FallThing obj in objects)
         {

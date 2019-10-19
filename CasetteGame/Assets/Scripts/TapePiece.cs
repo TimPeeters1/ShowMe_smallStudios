@@ -8,9 +8,12 @@ public class TapePiece : MonoBehaviour
 {
     [SerializeField] Color _color;
 
+    [SerializeField] GameObject ParticleSystem;
+
     private void Start()
     {
         GetComponent<UnityEngine.UI.Image>().color = _color;
+        ParticleSystem.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -18,11 +21,23 @@ public class TapePiece : MonoBehaviour
         try
         {
             collision.GetComponent<ICatchable>().DoCatch(_color);
+
+            if (collision.GetComponent<FallThing>()._myColor == _color)
+            {
+                StartCoroutine(doParticle());
+            }
         }
         catch 
         {
 
         }
+    }
+
+    IEnumerator doParticle()
+    {
+        ParticleSystem.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        ParticleSystem.SetActive(false);
     }
 
 }

@@ -9,7 +9,6 @@ public enum button
     left
 }
 
-
 public class Casette : MonoBehaviour
 {
     [SerializeField] Vector2 tapeRestriction;
@@ -19,7 +18,8 @@ public class Casette : MonoBehaviour
     [SerializeField] Button leftButton;
     [SerializeField] Button rightButton;
 
-    public float moveSpeed;
+    public float maxMoveSpeed;
+    [SerializeField] float moveSpeed;
 
     [SerializeField] bool isPressed = false;
     [SerializeField] button curButton;
@@ -34,6 +34,11 @@ public class Casette : MonoBehaviour
     {
         if (isPressed == true)
         {
+            moveSpeed += 0.08f * Time.deltaTime;
+
+            moveSpeed = Mathf.Clamp(moveSpeed, 0f, maxMoveSpeed);
+
+
             if (curButton == button.left)
             {
                 Vector3 _newPos = new Vector3(tape.position.x - moveSpeed, tape.position.y, tape.position.z);
@@ -46,6 +51,10 @@ public class Casette : MonoBehaviour
                 _newPos.x = Mathf.Clamp(_newPos.x, tapeRestriction.x, tapeRestriction.y);
                 tape.position = _newPos;
             }
+        }
+        else
+        {
+            moveSpeed = 0;
         }
 
     }
