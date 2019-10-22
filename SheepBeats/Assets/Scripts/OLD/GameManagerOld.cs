@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManagerOld : MonoBehaviour
 {
     #region Singleton
-    public static GameManager Instance;
+    public static GameManagerOld Instance;
     private void Awake()
     {
         Instance = this;
@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < activeSheeps.Count; i++)
         {
             activeSheeps[i].DoJump();
+            CancelInvoke("UpdateRow");
         }
 
     }
