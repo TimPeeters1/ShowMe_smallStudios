@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
     }
     #endregion
 
@@ -28,9 +29,32 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     public Text highscoreText;
 
+    [Space]
+    [Header("Pause Menu")]
+    public GameObject pauseMenu;
+
     GameObject cameraObject;
     Spawner spawner;
     Casette player;
+
+    Vector3 _originalPos;
+
+    bool isPaused = false;
+    public void doPause()
+    {
+        if (!isPaused)
+        {
+            isPaused = true;
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            isPaused = false;
+            Time.timeScale = 1;
+            pauseMenu.SetActive(false);
+        }
+    }
 
     private void Start()
     {
@@ -38,6 +62,7 @@ public class GameManager : MonoBehaviour
         score = 0;
 
         Application.targetFrameRate = 60;
+        Time.timeScale = 1;
 
         cameraObject = Camera.main.gameObject;
         spawner = FindObjectOfType<Spawner>();
@@ -46,6 +71,10 @@ public class GameManager : MonoBehaviour
 
         scoreText.text = score.ToString();
         highscoreText.text = highScore.ToString();
+
+        _originalPos = cameraObject.transform.localPosition;
+
+        pauseMenu.SetActive(false);
     }
 
     private void Update()
@@ -53,14 +82,8 @@ public class GameManager : MonoBehaviour
        
     }
 
-    public void Damage()
-    {
-        
-    }
-
     public void addScore(int points)
     {
-
         score += points;
 
         scoreText.text = score.ToString();
@@ -79,7 +102,6 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator CameraShake(float _duration, float _magnitude)
     {
-        Vector3 _originalPos = cameraObject.transform.localPosition;
 
         float _elapsed = 0.0f;
 

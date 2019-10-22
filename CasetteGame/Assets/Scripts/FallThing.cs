@@ -14,15 +14,14 @@ public class FallThing : MonoBehaviour, ICatchable
     public float moveSpeed;
 
     public Color _myColor;
-    TrailRenderer trail;
+    [SerializeField] UnityEngine.UI.Image trail;
 
     void Start()
     {
         GetComponent<UnityEngine.UI.Image>().sprite = sprites[Random.Range(0, sprites.Length)];
         GetComponent<UnityEngine.UI.Image>().color = _myColor;
 
-        trail = GetComponentInChildren<TrailRenderer>();
-        trail.startColor = _myColor;
+        trail.color = new Color(_myColor.r, _myColor.g, _myColor.b, 0.3f);
     }
 
     void Update()
@@ -45,10 +44,9 @@ public class FallThing : MonoBehaviour, ICatchable
         }
         else
         {
-            //GameManager.Instance.Damage();
-            StartCoroutine(GameManager.Instance.CameraShake(.1f, .01f));
             GameManager.Instance.objects.Remove(this);
-            Destroy(this.gameObject);
+            StartCoroutine(GameManager.Instance.CameraShake(0.4f, 0.01f));
+            Destroy(this.gameObject, 3f);
         }
     }
 

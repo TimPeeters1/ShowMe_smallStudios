@@ -5,20 +5,20 @@ using UnityEngine;
 public class Sheep : MonoBehaviour
 {
 
-    public AnimationCurve hopCurve;
+    float timer;
 
     bool move = false;
 
-    bool doJump;
+    bool doHop;
 
-    [SerializeField] float timer;
+    public bool isJumping;
 
     public bool isGrounded()
     {
         RaycastHit hit;
         Physics.Raycast(new Ray(transform.position, -transform.up), out hit);
 
-        if(Vector3.Distance(transform.position, hit.point) < 3)
+        if (Vector3.Distance(transform.position, hit.point) < 2)
         {
             return true;
         }
@@ -42,7 +42,7 @@ public class Sheep : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (move && isGrounded())
+        if (move && !isJumping)
         {
             transform.position += transform.forward * 0.07f;
         }
@@ -50,18 +50,18 @@ public class Sheep : MonoBehaviour
 
     void FixedHop()
     {
-        if (!doJump && isGrounded())
+        if (!doHop && !isJumping)
         {
             GetComponent<Rigidbody>().AddForce(Vector3.up * 10f, ForceMode.Impulse);
-            doJump = true;
+            doHop = true;
         }
 
-        doJump = false;
+        doHop = false;
     }
 
     public void DoMove()
     {
-        timer = 0.5f;
+        timer = 0.4f;
 
         move = true;
         FixedHop();
@@ -69,8 +69,8 @@ public class Sheep : MonoBehaviour
 
     public void DoJump()
     {
-       GetComponent<Rigidbody>().AddForce(Vector3.up * 20f, ForceMode.Impulse);
-       GetComponent<Rigidbody>().AddForce(transform.forward * 5f, ForceMode.Impulse);
-        
+        isJumping = true;
+        GetComponent<Rigidbody>().AddForce(Vector3.up * 25f, ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddForce(transform.forward * 5f, ForceMode.Impulse);
     }
-} 
+}

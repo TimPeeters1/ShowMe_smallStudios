@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum button
-{
-    right,
-    left
-}
-
 public class Casette : MonoBehaviour
 {
     [SerializeField] Vector2 tapeRestriction;
@@ -34,7 +28,7 @@ public class Casette : MonoBehaviour
     {
         if (isPressed == true)
         {
-            moveSpeed += 0.08f * Time.deltaTime;
+            moveSpeed += 0.0005f;
 
             moveSpeed = Mathf.Clamp(moveSpeed, 0f, maxMoveSpeed);
 
@@ -54,14 +48,41 @@ public class Casette : MonoBehaviour
         }
         else
         {
-            moveSpeed = 0;
+            moveSpeed = 0f;
         }
 
     }
 
     private void Update()
     {
+        getInput();
         doMove();
+    }
+
+    void getInput()
+    {
+        RaycastHit hit;
+
+        if (Input.touchCount > 0)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.GetComponent<CasetteButton>())
+                {
+                    isPressed = true;
+                    curButton = hit.collider.GetComponentInParent<CasetteButton>().thisButton;
+                }
+            }
+            else
+            {
+                isPressed = false;
+            }
+        }
+        else
+        {
+            isPressed = false;
+        }
     }
 
 

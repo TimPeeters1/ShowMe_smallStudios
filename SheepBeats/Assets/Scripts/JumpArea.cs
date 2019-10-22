@@ -12,6 +12,8 @@ public class JumpArea : MonoBehaviour
         if (other.GetComponent<Sheep>())
         {
             currentSheep = other.GetComponent<Sheep>();
+
+            GameManager.Instance.currentScore += 10;
         }
     }
 

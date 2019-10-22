@@ -10,14 +10,13 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
 
-        Application.targetFrameRate = 60;
+        //Application.targetFrameRate = 60;
         if (Application.isMobilePlatform)
         {
             QualitySettings.vSyncCount = 0;
         }
     }
     #endregion
-
 
     [Header("Spawn Prefab")]
     public GameObject prefab;
@@ -35,19 +34,26 @@ public class GameManager : MonoBehaviour
     public float walkInterval;
 
     [Space]
+    [Header("UI Settings")]
+    [SerializeField] UnityEngine.UI.Text scoreText;
+
+    [Space]
     [Header("|Debug Settings|")]
     [SerializeField] bool isDebug;
     [SerializeField] UnityEngine.UI.Text fpsCounter;
+
+    [HideInInspector] public float currentScore;
 
     bool isTouching = false;
     bool canJump()
     {
         for (int i = 0; i < activeSheeps.Count; i++)
         {
-            if (activeSheeps[i].isGrounded()) { return true; } else { return false; }
+            if (activeSheeps[i].isGrounded() && !activeSheeps[i].isJumping) { return true; } else { return false; }
         }
         return false;
     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +61,13 @@ public class GameManager : MonoBehaviour
         InvokeRepeating("SpawnSheep", 0f, spawnInterval);
 
         InvokeRepeating("UpdateRow", 0f, walkInterval);
-        
+
+        fpsCounter.gameObject.SetActive(false);
+
+        if (isDebug)
+        {
+            fpsCounter.gameObject.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -76,10 +88,13 @@ public class GameManager : MonoBehaviour
             isTouching = false;
         }
 
-        Debug.Log(canJump());
+        scoreText.text = currentScore.ToString();
 
+        if (isDebug)
+        {
+            fpsCounter.text = "FPS " + ((int)(1f / Time.unscaledDeltaTime)).ToString() + " || " + canJump().ToString();
+        }
 
-        fpsCounter.text =  "FPS " + ((int) (1f / Time.unscaledDeltaTime)).ToString();
     }
 
     void SpawnSheep()
@@ -92,6 +107,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < activeSheeps.Count; i++)
         {
+            activeSheeps[i].isJumping = true;
             activeSheeps[i].DoJump();
         }
     }
