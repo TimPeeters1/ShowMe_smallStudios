@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class JumpArea : MonoBehaviour
+public class SuccesArea : MonoBehaviour
 {
     Sheep currentSheep;
 
@@ -12,6 +12,8 @@ public class JumpArea : MonoBehaviour
         if (other.GetComponent<Sheep>())
         {
             currentSheep = other.GetComponent<Sheep>();
+
+            GameManager.Instance.currentScore += 10;
         }
     }
 

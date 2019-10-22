@@ -45,11 +45,22 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float currentScore;
 
     bool isTouching = false;
+    [SerializeField] bool isUpdating = true;
+
     bool canJump()
     {
         for (int i = 0; i < activeSheeps.Count; i++)
         {
-            if (activeSheeps[i].isGrounded() && !activeSheeps[i].isJumping) { return true; } else { return false; }
+            if (activeSheeps[i].isGrounded()) { return true; }
+            else
+            {
+                if (!isUpdating)
+                {
+                    InvokeRepeating("UpdateRow", walkInterval, walkInterval);
+                    isUpdating = true;
+                }
+                return false;
+            }
         }
         return false;
     }
@@ -58,7 +69,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnSheep", 0f, spawnInterval);
+        SpawnSheep();
+        //InvokeRepeating("SpawnSheep", 0f, spawnInterval);
 
         InvokeRepeating("UpdateRow", 0f, walkInterval);
 
@@ -73,7 +85,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.touchCount > 0 && !isTouching )
+        if (Input.touchCount > 0 && !isTouching)
         {
             isTouching = true;
 
@@ -83,7 +95,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(Input.touchCount == 0)
+        if (Input.touchCount == 0)
         {
             isTouching = false;
         }
@@ -95,6 +107,8 @@ public class GameManager : MonoBehaviour
             fpsCounter.text = "FPS " + ((int)(1f / Time.unscaledDeltaTime)).ToString() + " || " + canJump().ToString();
         }
 
+
+
     }
 
     void SpawnSheep()
@@ -105,18 +119,28 @@ public class GameManager : MonoBehaviour
 
     void JumpRow()
     {
+        isUpdating = false;
+
         for (int i = 0; i < activeSheeps.Count; i++)
         {
-            activeSheeps[i].isJumping = true;
             activeSheeps[i].DoJump();
+            CancelInvoke("UpdateRow");
         }
+
     }
 
     void UpdateRow()
-    {   
+    {
+        Debug.Log("Update Row");
+
         for (int i = 0; i < activeSheeps.Count; i++)
         {
             activeSheeps[i].StartCoroutine("DoMove");
         }
+    }
+
+    void StartUpdate()
+    {
+
     }
 }

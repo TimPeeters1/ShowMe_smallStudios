@@ -18,14 +18,18 @@ public class Sheep : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(new Ray(transform.position, -transform.up), out hit);
 
-        if (Vector3.Distance(transform.position, hit.point) < 2)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+      
+            if (GetComponent<Rigidbody>().velocity.y == 0)
+            {
+                isJumping = false;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        
+        return false;
     }
 
     private void Update()
@@ -44,7 +48,7 @@ public class Sheep : MonoBehaviour
     {
         if (move && !isJumping)
         {
-            transform.position += transform.forward * 0.07f;
+            transform.position += transform.forward * 0.1f;
         }
     }
 
@@ -52,7 +56,7 @@ public class Sheep : MonoBehaviour
     {
         if (!doHop && !isJumping)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.up * 10f, ForceMode.Impulse);
+            GetComponent<Rigidbody>().AddForce(Vector3.up * 15f, ForceMode.Impulse);
             doHop = true;
         }
 
@@ -61,7 +65,7 @@ public class Sheep : MonoBehaviour
 
     public void DoMove()
     {
-        timer = 0.4f;
+        timer = 0.6f;
 
         move = true;
         FixedHop();
@@ -70,6 +74,9 @@ public class Sheep : MonoBehaviour
     public void DoJump()
     {
         isJumping = true;
+
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+
         GetComponent<Rigidbody>().AddForce(Vector3.up * 25f, ForceMode.Impulse);
         GetComponent<Rigidbody>().AddForce(transform.forward * 5f, ForceMode.Impulse);
     }
