@@ -43,10 +43,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86d92aee88890df41b2d7e11cbede20c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileNumber: 0
+  biomes:
+  - {fileID: 11400000, guid: 9833affbd8666a84ca33f6eb38d6024b, type: 2}
+  - {fileID: 11400000, guid: 83b0b240e6a004146a5f6172cf421828, type: 2}
+  currentBiome: {fileID: 11400000, guid: 9833affbd8666a84ca33f6eb38d6024b, type: 2}
   tilePrefabs:
-  - {fileID: 7799714366585441760, guid: 5225de6522a2e7b4899d6bd28a8b9ae4, type: 3}
-  - {fileID: 8620475414197053306, guid: 4e7cc6a7c1009ef49a8c70edcafd12ce, type: 3}
-  - {fileID: 2586588161163833269, guid: ee614e23dd88dce47b609369a1bc934c, type: 3}
-  - {fileID: 7072294967779590510, guid: 230c23bf75a42d947a945e5d56324b81, type: 3}
-  - {fileID: 7242369634298372783, guid: 20949b1d251eb3f44aede92e9bc45d85, type: 3}
+  - {fileID: 3160266887663418818, guid: 60c7c8f4e7c48e5488497d215cc280ac, type: 3}
+  - {fileID: 3160266887663418818, guid: 60c7c8f4e7c48e5488497d215cc280ac, type: 3}
+  - {fileID: 2138199714080032874, guid: c1e554fba40701048ae9270c33bec4f5, type: 3}
+  - {fileID: 5810764746531900624, guid: 89d4c4d074b236146b02bf0d5cb9456f, type: 3}
+  tileLength: 35
+  tileOnScreenAmount: 5
   activeTiles: []

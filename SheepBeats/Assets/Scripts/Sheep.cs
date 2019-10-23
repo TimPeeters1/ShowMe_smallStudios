@@ -46,11 +46,14 @@ public class Sheep : MonoBehaviour
     {
         isJumping = true;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
-        GetComponent<Rigidbody>().AddForce(Vector3.up * 25f, ForceMode.Impulse);
-
+        
         if (inRange)
         {
-            GetComponent<Rigidbody>().AddForce(transform.forward * 5f, ForceMode.Impulse);
-        }       
+            GetComponent<Rigidbody>().AddForce(Vector3.up * 25f, ForceMode.Impulse);
+        }
+        else
+        {
+            GetComponent<Rigidbody>().AddForce(Vector3.up * 20f, ForceMode.Impulse);
+        }
     }
 }

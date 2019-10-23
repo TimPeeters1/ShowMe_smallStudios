@@ -9,8 +9,7 @@ public class Fence : MonoBehaviour
     {
         if (other.GetComponent<Sheep>())
         {
-            Debug.Log("Hit Fence");
-            Destroy(other.gameObject);
+            StartCoroutine(GameManager.Instance.GameOver());
         }
     }
 

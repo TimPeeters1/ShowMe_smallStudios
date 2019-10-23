@@ -35,13 +35,17 @@ public class GameManager : MonoBehaviour
     [Space]
     [Header("UI Settings")]
     [SerializeField] UnityEngine.UI.Text scoreText;
+    [SerializeField] UnityEngine.UI.Text highscoreText;
+    [SerializeField] GameObject gameOverScreen;
+    [SerializeField] GameObject pauseScreen;
 
     [Space]
     [Header("|Debug Settings|")]
     [SerializeField] bool isDebug;
     [SerializeField] UnityEngine.UI.Text fpsCounter;
 
-    [HideInInspector] public float currentScore;
+    [HideInInspector] public int currentscore;
+    [HideInInspector] int highscore;
 
     GameObject mainCam;
 
@@ -53,6 +57,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
+        highscore = PlayerPrefs.GetInt("Highscore", highscore);
         player = SpawnSheep();
 
         mainCam = Camera.main.gameObject;
@@ -65,9 +70,11 @@ public class GameManager : MonoBehaviour
         {
             fpsCounter.gameObject.SetActive(true);
         }
+
+        gameOverScreen.SetActive(false);
+        player.GetComponent<Animator>().enabled = true;
     }
 
-    // Update is called once per frame  
     void Update()
     {
         if (Input.touchCount > 0 && !isTouching)
@@ -85,7 +92,8 @@ public class GameManager : MonoBehaviour
             isTouching = false;
         }
 
-        scoreText.text = currentScore.ToString();
+        scoreText.text = currentscore.ToString();
+        highscoreText.text = highscore.ToString();
 
         if (isDebug)
         {
@@ -99,4 +107,29 @@ public class GameManager : MonoBehaviour
         return sheep.GetComponent<Sheep>();
     }
 
+    public IEnumerator GameOver()
+    {
+        if (currentscore > highscore)
+        {
+            highscore = currentscore;
+        }
+        PlayerPrefs.SetInt("Highscore", highscore);
+
+        tileMoveSpeed = 0;
+
+        player.GetComponent<Animator>().enabled = false;
+
+        player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        player.GetComponent<Rigidbody>().AddForce(Vector3.up * 10f, ForceMode.Impulse);
+        player.GetComponent<Rigidbody>().AddForce(-Vector3.right * 5f, ForceMode.Impulse);
+        player.GetComponent<Rigidbody>().AddTorque(Vector3.forward * 10f, ForceMode.Impulse);
+
+        //Destroy(player.gameObject, 2);
+
+        yield return new WaitForSecondsRealtime(2);
+
+        gameOverScreen.SetActive(true);
+        gameOverScreen.GetComponent<UnityEngine.UI.Text>().text = "Your Score: " + currentscore + "\n Highscore: " + highscore;
+
+    }
 }
