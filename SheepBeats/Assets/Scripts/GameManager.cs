@@ -72,7 +72,6 @@ public class GameManager : MonoBehaviour
         }
 
         gameOverScreen.SetActive(false);
-        player.GetComponent<Animator>().enabled = true;
     }
 
     void Update()

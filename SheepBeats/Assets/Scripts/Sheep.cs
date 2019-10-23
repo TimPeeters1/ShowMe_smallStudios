@@ -12,11 +12,16 @@ public class Sheep : MonoBehaviour
 
     public bool isJumping;
 
+    Animator anim;
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     public bool isGrounded()
     {
         RaycastHit hit;
         Physics.Raycast(new Ray(transform.position, -transform.up), out hit);
-
 
         if (Vector3.Distance(transform.position, hit.point) < 2.5f)
         {
@@ -40,6 +45,8 @@ public class Sheep : MonoBehaviour
             move = false;
             timer = 0;
         }
+
+        anim.SetBool("isGrounded", isGrounded());
     }
 
     public void DoJump()
