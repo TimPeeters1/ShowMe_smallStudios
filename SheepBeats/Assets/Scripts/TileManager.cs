@@ -4,26 +4,40 @@ using UnityEngine;
 
 public class TileManager : MonoBehaviour
 {
+    #region Singleton
+    public static TileManager Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
+    #endregion
+
     //Used tutorial 'Unity Endless Tutorial' Episode 6 and 7 from N3K EN on YouTube
 
     public GameObject[] tilePrefabs;
     private Transform spawnTransform;
-    private float tileLength = 35f;
-    private int amnTilesOnScreen = 5;
+
+    [Space]
+    [SerializeField] float tileLength = 33f;
+
+    [Space]
+    [SerializeField] int tileOnScreenAmount = 5; //amount of tiles on screen
+
     private float h = 60f;
     private int lastPrefabIndex = 0;
 
+    [Space]
     public List<GameObject> activeTiles;
 
     // Start is called before the first frame update
     void Start()
     {
         activeTiles = new List<GameObject>();
-        spawnTransform = GetComponent<Transform>();
-        h = spawnTransform.position.x - amnTilesOnScreen * tileLength;
-        for (int i = 0; i < amnTilesOnScreen; i++)
+        spawnTransform = transform;
+        h = spawnTransform.position.x - tileOnScreenAmount * tileLength;
+        for (int i = 0; i < tileOnScreenAmount; i++)
         {
-            SpawnTileStart(new Vector3(h, 0, -30));
+            SpawnTileStart(new Vector3(h, 0, 0));
             h += tileLength;
         }
     }
@@ -31,11 +45,11 @@ public class TileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(activeTiles[activeTiles.Count - 1].transform.position.x);
-        if (activeTiles[activeTiles.Count - 1].transform.position.x <= 25)
+        //Debug.Log(activeTiles[activeTiles.Count - 1].transform.position.x);
+        if (activeTiles[activeTiles.Count - 1].transform.position.x <= 26)
         {
             SpawnTile();
-            if (activeTiles.Count - 1 == amnTilesOnScreen)
+            if (activeTiles.Count - 1 == tileOnScreenAmount)
             {
                 DeleteTile();
             }
@@ -44,11 +58,13 @@ public class TileManager : MonoBehaviour
 
     private void SpawnTile()
     {
-        GameObject go;
-        go = Instantiate(tilePrefabs[RandomPrefabIndex()]) as GameObject;
-        go.transform.SetParent (transform);
+        GameObject go = Instantiate(tilePrefabs[RandomPrefabIndex()]) as GameObject;
+        go.transform.SetParent(transform);
         go.transform.position = spawnTransform.position;
         activeTiles.Add(go);
+
+        if (!go.GetComponent<TileScroll>())
+            go.AddComponent<TileScroll>();
     }
 
     private void DeleteTile()
@@ -59,11 +75,13 @@ public class TileManager : MonoBehaviour
 
     private void SpawnTileStart(Vector3 tilePosition)
     {
-        GameObject go;
-        go = Instantiate(tilePrefabs[RandomPrefabIndex()]) as GameObject;
+        GameObject go = Instantiate(tilePrefabs[RandomPrefabIndex()]) as GameObject;
         go.transform.SetParent(transform);
         go.transform.position = tilePosition;
         activeTiles.Add(go);
+
+        if(!go.GetComponent<TileScroll>())
+        go.AddComponent<TileScroll>();
     }
 
     private int RandomPrefabIndex()

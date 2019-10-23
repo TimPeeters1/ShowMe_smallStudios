@@ -16,6 +16,8 @@ public class TileScroll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        scrollSpeed = GameManager.Instance.tileMoveSpeed;
+
         tileTransform.position += new Vector3(-scrollSpeed, 0, 0);
     }
 }

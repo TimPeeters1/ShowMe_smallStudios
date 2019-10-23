@@ -4,15 +4,53 @@ using UnityEngine;
 
 public class Sheep : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    float timer;
+
+    bool move = false;
+
+    public bool inRange;
+
+    public bool isJumping;
+
+    public bool isGrounded()
     {
-        
+        RaycastHit hit;
+        Physics.Raycast(new Ray(transform.position, -transform.up), out hit);
+
+
+        if (Vector3.Distance(transform.position, hit.point) < 2.5f)
+        {
+            isJumping = false;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+        return false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        { 
+            move = false;
+            timer = 0;
+        }
+    }
+
+    public void DoJump()
+    {
+        isJumping = true;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().AddForce(Vector3.up * 25f, ForceMode.Impulse);
+
+        if (inRange)
+        {
+            GetComponent<Rigidbody>().AddForce(transform.forward * 5f, ForceMode.Impulse);
+        }       
     }
 }

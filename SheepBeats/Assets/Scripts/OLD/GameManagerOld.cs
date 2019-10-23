@@ -114,7 +114,7 @@ public class GameManagerOld : MonoBehaviour
     void SpawnSheep()
     {
         GameObject sheep = Instantiate(prefab, spawnPosition.position, spawnPosition.rotation);
-        activeSheeps.Add(sheep.GetComponent<Sheep>());
+        activeSheeps.Add(sheep.GetComponent<SheepOld>());
     }
 
     void JumpRow()

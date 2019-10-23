@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 6967281728574224486}
   - component: {fileID: 6967281728574224487}
   - component: {fileID: 6967281728574224484}
-  - component: {fileID: -4745006591159175334}
-  - component: {fileID: 639928780}
+  - component: {fileID: 6967281728574224485}
   m_Layer: 0
   m_Name: Sheep
   m_TagString: Untagged
@@ -92,13 +91,13 @@ Rigidbody:
   m_GameObject: {fileID: 6967281728574224490}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 120
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!64 &6967281728574224484
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -113,7 +112,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: -321270947451227426, guid: a52f30c4da666954f9b5a4ee6c4eef1f, type: 3}
---- !u!114 &-4745006591159175334
+--- !u!114 &6967281728574224485
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,27 +121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6967281728574224490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a9ff6794ea483f46b0e14179e35c9cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 14dd9ebd4ff43bc45945c419beea1e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inRange: 0
   isJumping: 0
---- !u!95 &639928780
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6967281728574224490}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 59c3116d14cf9fb48a23da8826f78478, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

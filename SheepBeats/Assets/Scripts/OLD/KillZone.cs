@@ -8,7 +8,7 @@ public class KillZone : MonoBehaviour
     {
         if (other.GetComponent<Sheep>())
         {
-            GameManager.Instance.activeSheeps.Remove(other.GetComponent<Sheep>());
+            GameManagerOld.Instance.activeSheeps.Remove(other.GetComponent<SheepOld>());
             Destroy(other.gameObject);
         }
     }

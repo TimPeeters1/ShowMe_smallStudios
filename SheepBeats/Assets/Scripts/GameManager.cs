@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
 
-        //Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60;
         if (Application.isMobilePlatform)
         {
             QualitySettings.vSyncCount = 0;
@@ -22,16 +22,15 @@ public class GameManager : MonoBehaviour
     public GameObject prefab;
 
     [Space]
-    public List<SheepOld> activeSheeps;
+    public Sheep player;
 
     [Space]
     [Header("Spawn Settings")]
     public Transform spawnPosition;
-    public float spawnInterval;
 
     [Space]
     [Header("Move Settings")]
-    public float walkInterval;
+    public float tileMoveSpeed;
 
     [Space]
     [Header("UI Settings")]
@@ -44,35 +43,21 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public float currentScore;
 
-    bool isTouching = false;
-    [SerializeField] bool isUpdating = true;
+    GameObject mainCam;
 
-    bool canJump()
-    {
-        for (int i = 0; i < activeSheeps.Count; i++)
-        {
-            if (activeSheeps[i].isGrounded()) { return true; }
-            else
-            {
-                if (!isUpdating)
-                {
-                    InvokeRepeating("UpdateRow", walkInterval, walkInterval);
-                    isUpdating = true;
-                }
-                return false;
-            }
-        }
-        return false;
-    }
+    bool isTouching = false;
+    bool canJump;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //SpawnSheep();
-        //InvokeRepeating("SpawnSheep", 0f, spawnInterval);
 
-        //InvokeRepeating("UpdateRow", 0f, walkInterval);
+        player = SpawnSheep();
+
+        mainCam = Camera.main.gameObject;
+        mainCam.GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = player.gameObject.transform;
+        mainCam.GetComponent<Cinemachine.CinemachineVirtualCamera>().LookAt = player.gameObject.transform;
 
         fpsCounter.gameObject.SetActive(false);
 
@@ -82,16 +67,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    // Update is called once per frame  
     void Update()
     {
         if (Input.touchCount > 0 && !isTouching)
         {
             isTouching = true;
 
-            if (canJump())
+            if (player.isGrounded())
             {
-                JumpRow();
+                player.DoJump();
             }
         }
 
@@ -104,42 +89,14 @@ public class GameManager : MonoBehaviour
 
         if (isDebug)
         {
-            fpsCounter.text = "FPS " + ((int)(1f / Time.unscaledDeltaTime)).ToString() + " || " + canJump().ToString();
+            fpsCounter.text = "FPS " + ((int)(1f / Time.unscaledDeltaTime)).ToString() + " || " + player.isGrounded();
         }
-
-
-
     }
 
-    void SpawnSheep()
+    Sheep SpawnSheep()
     {
         GameObject sheep = Instantiate(prefab, spawnPosition.position, spawnPosition.rotation);
-        activeSheeps.Add(sheep.GetComponent<Sheep>());
+        return sheep.GetComponent<Sheep>();
     }
 
-    void JumpRow()
-    {
-        isUpdating = false;
-
-        for (int i = 0; i < activeSheeps.Count; i++)
-        {
-            activeSheeps[i].DoJump();
-        }
-
-    }
-
-    void UpdateRow()
-    {
-        Debug.Log("Update Row");
-
-        for (int i = 0; i < activeSheeps.Count; i++)
-        {
-            activeSheeps[i].StartCoroutine("DoMove");
-        }
-    }
-
-    void StartUpdate()
-    {
-
-    }
 }

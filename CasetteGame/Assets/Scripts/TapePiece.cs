@@ -24,7 +24,7 @@ public class TapePiece : MonoBehaviour
 
             if (collision.GetComponent<FallThing>()._myColor == _color)
             {
-                //StartCoroutine(doParticle());
+                StartCoroutine(doParticle());
             }
         }
         catch 
