@@ -12,7 +12,15 @@ public class TileManager : MonoBehaviour
     }
     #endregion
 
-    //Used tutorial 'Unity Endless Tutorial' Episode 6 and 7 from N3K EN on YouTube
+    [Space]
+    [Header("Biome Options/Info")]
+    [SerializeField] double tileNumber;
+    [SerializeField] Biome[] biomes;
+    [SerializeField] Biome currentBiome;
+    int curBiomeSize;
+
+    //Script modified by Tim
+    ///Used tutorial 'Unity Endless Tutorial' Episode 6 and 7 from N3K EN on YouTube 
 
     public GameObject[] tilePrefabs;
     private Transform spawnTransform;
@@ -40,6 +48,10 @@ public class TileManager : MonoBehaviour
             SpawnTileStart(new Vector3(h, 0, 0));
             h += tileLength;
         }
+
+        currentBiome = biomes[0];
+        tileNumber = 0;
+        curBiomeSize = Mathf.RoundToInt(Random.Range(currentBiome.biomeSize.x, currentBiome.biomeSize.y));
     }
 
     // Update is called once per frame
@@ -49,16 +61,23 @@ public class TileManager : MonoBehaviour
         if (activeTiles[activeTiles.Count - 1].transform.position.x <= 26)
         {
             SpawnTile();
+            tileNumber++;
             if (activeTiles.Count - 1 == tileOnScreenAmount)
             {
                 DeleteTile();
             }
         }
+
+        if((tileNumber % curBiomeSize) == 0)
+        {
+            curBiomeSize = Mathf.RoundToInt(Random.Range(currentBiome.biomeSize.x, currentBiome.biomeSize.y));
+            currentBiome = biomes[Random.Range(0, biomes.Length)];
+        }
     }
 
     private void SpawnTile()
     {
-        GameObject go = Instantiate(tilePrefabs[RandomPrefabIndex()]) as GameObject;
+        GameObject go = Instantiate(currentBiome.tiles[RandomPrefabIndex()]);
         go.transform.SetParent(transform);
         go.transform.position = spawnTransform.position;
         activeTiles.Add(go);
@@ -75,7 +94,7 @@ public class TileManager : MonoBehaviour
 
     private void SpawnTileStart(Vector3 tilePosition)
     {
-        GameObject go = Instantiate(tilePrefabs[RandomPrefabIndex()]) as GameObject;
+        GameObject go = Instantiate(currentBiome.tiles[RandomPrefabIndex()]);
         go.transform.SetParent(transform);
         go.transform.position = tilePosition;
         activeTiles.Add(go);
@@ -86,7 +105,7 @@ public class TileManager : MonoBehaviour
 
     private int RandomPrefabIndex()
     {
-        if (tilePrefabs.Length <= 1)
+        if (currentBiome.tiles.Length <= 1)
         {
             return 0;
         }
@@ -94,7 +113,7 @@ public class TileManager : MonoBehaviour
         int randomIndex = lastPrefabIndex;
         while (randomIndex == lastPrefabIndex)
         {
-            randomIndex = Random.Range(0, tilePrefabs.Length);
+            randomIndex = Random.Range(0, currentBiome.tiles.Length);
         }
 
         lastPrefabIndex = randomIndex;

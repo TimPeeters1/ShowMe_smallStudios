@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1fd8191ba023374c8b65353e8403274, type: 3}
+  m_Name: Desert
+  m_EditorClassIdentifier: 
+  biomeName: Desert
+  tiles:
+  - {fileID: 2138199714080032874, guid: c1e554fba40701048ae9270c33bec4f5, type: 3}
+  - {fileID: 1963011622227665536, guid: 89c0fd5316c0e6243a878ff0cd4202e4, type: 3}
+  - {fileID: 5810764746531900624, guid: 89d4c4d074b236146b02bf0d5cb9456f, type: 3}
+  - {fileID: 2913040392018040076, guid: 4501a34db2d12c1409274df9fc423da0, type: 3}
+  - {fileID: 9185295517622360423, guid: f64afada56787e147a220c85ece6f63f, type: 3}
+  biomeSize: {x: 3, y: 10}
