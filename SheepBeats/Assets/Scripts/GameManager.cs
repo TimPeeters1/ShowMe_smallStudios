@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount > 0 && !isTouching)
+        if (Input.touchCount > 0 && !isTouching || isDebug && Input.GetKeyDown(KeyCode.Space))
         {
             isTouching = true;
 
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.touchCount == 0)
+        if (Input.touchCount == 0 || isDebug && Input.GetKeyUp(KeyCode.Space))
         {
             isTouching = false;
         }
@@ -130,5 +130,10 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(true);
         gameOverScreen.GetComponent<UnityEngine.UI.Text>().text = "Your Score: " + currentscore + "\n Highscore: " + highscore;
 
+    }
+
+    public void RestartGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 }

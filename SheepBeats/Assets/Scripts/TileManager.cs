@@ -42,13 +42,15 @@ public class TileManager : MonoBehaviour
     {
         activeTiles = new List<GameObject>();
         spawnTransform = transform;
-        h = spawnTransform.position.x - tileOnScreenAmount * tileLength;
+        h = spawnTransform.position.x;
+        h -= tileOnScreenAmount * tileLength - 1;
+
         for (int i = 0; i < tileOnScreenAmount; i++)
         {
             SpawnTileStart(new Vector3(h, 0, 0));
             h += tileLength;
         }
-
+        
         currentBiome = biomes[0];
         tileNumber = 0;
         curBiomeSize = Mathf.RoundToInt(Random.Range(currentBiome.biomeSize.x, currentBiome.biomeSize.y));
@@ -78,6 +80,7 @@ public class TileManager : MonoBehaviour
     private void SpawnTile()
     {
         GameObject go = Instantiate(currentBiome.tiles[RandomPrefabIndex()]);
+        //Debug.Log(go.GetComponent<Collider>().bounds.size.x);
         go.transform.SetParent(transform);
         go.transform.position = spawnTransform.position;
         activeTiles.Add(go);

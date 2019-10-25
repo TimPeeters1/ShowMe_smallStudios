@@ -13,7 +13,7 @@ public class SuccesArea : MonoBehaviour
         {
             currentSheep = other.GetComponent<Sheep>();
 
-            GameManager.Instance.currentscore += 10;
+            GameManager.Instance.currentscore++;
         }
     }
 
