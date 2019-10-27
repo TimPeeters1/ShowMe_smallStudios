@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Sheep : MonoBehaviour
 {
+    public LayerMask IgnoreLayer;
+
     float timer;
 
     bool move = false;
@@ -15,13 +17,13 @@ public class Sheep : MonoBehaviour
     Animator anim;
     private void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     public bool isGrounded()
     {
         RaycastHit hit;
-        Physics.Raycast(new Ray(transform.position, -transform.up), out hit);
+        Physics.Raycast(new Ray(transform.position, -transform.up), out hit, IgnoreLayer.value);
 
         if (Vector3.Distance(transform.position, hit.point) < 2.5f)
         {
@@ -56,11 +58,11 @@ public class Sheep : MonoBehaviour
         
         if (inRange)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.up * 25f, ForceMode.Impulse);
+            GetComponent<Rigidbody>().AddForce(Vector3.up * 30f, ForceMode.Impulse);
         }
         else
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.up * 20f, ForceMode.Impulse);
+            GetComponent<Rigidbody>().AddForce(Vector3.up * 25f, ForceMode.Impulse);
         }
     }
 }

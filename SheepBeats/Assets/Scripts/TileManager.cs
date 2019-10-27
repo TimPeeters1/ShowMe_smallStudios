@@ -17,6 +17,8 @@ public class TileManager : MonoBehaviour
     [SerializeField] double tileNumber;
     [SerializeField] Biome[] biomes;
     [SerializeField] Biome currentBiome;
+
+    int curBiomeTile;
     int curBiomeSize;
 
     //Script modified by Tim
@@ -53,6 +55,8 @@ public class TileManager : MonoBehaviour
         
         currentBiome = biomes[0];
         tileNumber = 0;
+        curBiomeTile = 0;
+
         curBiomeSize = Mathf.RoundToInt(Random.Range(currentBiome.biomeSize.x, currentBiome.biomeSize.y));
     }
 
@@ -64,16 +68,22 @@ public class TileManager : MonoBehaviour
         {
             SpawnTile();
             tileNumber++;
+            curBiomeTile++;
+
             if (activeTiles.Count - 1 == tileOnScreenAmount)
             {
                 DeleteTile();
-            }
+            }   
         }
 
-        if((tileNumber % curBiomeSize) == 0)
+        if(curBiomeTile == curBiomeSize)
         {
             curBiomeSize = Mathf.RoundToInt(Random.Range(currentBiome.biomeSize.x, currentBiome.biomeSize.y));
+
             currentBiome = biomes[Random.Range(0, biomes.Length)];
+            //currentBiome = biomes[RandomPrefabIndex()];
+
+            curBiomeTile = 0;
         }
     }
 

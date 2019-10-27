@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     [Space]
     [Header("Move Settings")]
     public float tileMoveSpeed;
+    public float moveMultiplier;
 
     [Space]
     [Header("UI Settings")]
@@ -96,7 +97,7 @@ public class GameManager : MonoBehaviour
 
         if (isDebug)
         {
-            fpsCounter.text = "FPS " + ((int)(1f / Time.unscaledDeltaTime)).ToString() + " || " + player.isGrounded();
+            fpsCounter.text = "FPS " + ((int)(1f / Time.unscaledDeltaTime)).ToString() + " || " + player.isGrounded() + " || " + tileMoveSpeed.ToString();
         }
     }
 
@@ -116,7 +117,7 @@ public class GameManager : MonoBehaviour
 
         tileMoveSpeed = 0;
 
-        player.GetComponent<Animator>().enabled = false;
+        player.GetComponentInChildren<Animator>().enabled = false;
 
         player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         player.GetComponent<Rigidbody>().AddForce(Vector3.up * 10f, ForceMode.Impulse);
