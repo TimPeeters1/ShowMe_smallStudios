@@ -7,7 +7,7 @@ public class Fence : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Sheep>())
+        if (other.GetComponentInParent<Sheep>())
         {
             StartCoroutine(GameManager.Instance.GameOver());
         }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6967281728574224490
+--- !u!1 &126667272
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6967281728574224480}
-  - component: {fileID: 6967281728574224481}
-  - component: {fileID: 6967281728574224486}
-  - component: {fileID: 6967281728574224487}
-  - component: {fileID: 6967281728574224484}
-  - component: {fileID: -4745006591159175334}
-  - component: {fileID: 639928780}
+  - component: {fileID: 126667273}
+  - component: {fileID: 126667276}
+  - component: {fileID: 126667275}
+  - component: {fileID: 126667274}
+  - component: {fileID: 2590447989941123458}
   m_Layer: 0
-  m_Name: Sheep
-  m_TagString: Untagged
+  m_Name: SheepModel
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6967281728574224480
+--- !u!4 &126667273
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6967281728574224490}
-  m_LocalRotation: {x: 0, y: 0.7152233, z: 0, w: 0.698896}
-  m_LocalPosition: {x: 0.5, y: 3.2, z: 2.3}
+  m_GameObject: {fileID: 126667272}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 6967281728574224480}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 91.323006, z: 0}
---- !u!33 &6967281728574224481
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6967281728574224490}
-  m_Mesh: {fileID: -321270947451227426, guid: a52f30c4da666954f9b5a4ee6c4eef1f, type: 3}
---- !u!23 &6967281728574224486
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &126667276
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6967281728574224490}
+  m_GameObject: {fileID: 126667272}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -83,6 +73,80 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &126667275
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126667272}
+  m_Mesh: {fileID: -321270947451227426, guid: a52f30c4da666954f9b5a4ee6c4eef1f, type: 3}
+--- !u!95 &126667274
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126667272}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 59c3116d14cf9fb48a23da8826f78478, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!64 &2590447989941123458
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126667272}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -321270947451227426, guid: a52f30c4da666954f9b5a4ee6c4eef1f, type: 3}
+--- !u!1 &6967281728574224490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6967281728574224480}
+  - component: {fileID: 6967281728574224487}
+  - component: {fileID: -4745006591159175334}
+  m_Layer: 0
+  m_Name: Sheep
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6967281728574224480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6967281728574224490}
+  m_LocalRotation: {x: 0, y: 0.7152233, z: 0, w: 0.698896}
+  m_LocalPosition: {x: 0.5, y: 3.2, z: 2.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 126667273}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 91.323006, z: 0}
 --- !u!54 &6967281728574224487
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -99,20 +163,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 120
   m_CollisionDetection: 1
---- !u!64 &6967281728574224484
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6967281728574224490}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -321270947451227426, guid: a52f30c4da666954f9b5a4ee6c4eef1f, type: 3}
 --- !u!114 &-4745006591159175334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,24 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a9ff6794ea483f46b0e14179e35c9cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 512
   inRange: 0
   isJumping: 0
---- !u!95 &639928780
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6967281728574224490}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 59c3116d14cf9fb48a23da8826f78478, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

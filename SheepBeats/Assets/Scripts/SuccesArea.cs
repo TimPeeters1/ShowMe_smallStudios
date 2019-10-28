@@ -9,11 +9,13 @@ public class SuccesArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Sheep>())
+        if (other.GetComponentInParent<Sheep>())
         {
             currentSheep = other.GetComponent<Sheep>();
 
             GameManager.Instance.currentscore++;
+
+            GameManager.Instance.tileMoveSpeed += GameManager.Instance.moveMultiplier;
         }
     }
 
