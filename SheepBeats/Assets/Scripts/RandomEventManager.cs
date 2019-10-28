@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class RandomEventManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Transform[] spawnPositions;
+
+    [SerializeField] RandomEvent[] events;
+    [SerializeField] RandomEvent curEvent;
+
+    GameObject curEventObject;
+
+    private void Start()
     {
-        
+        curEvent = events[Random.Range(0, events.Length)];
+
+        StartCoroutine(PerformEvent());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator PerformEvent()
     {
-        
+        yield return new WaitForSeconds(Random.Range(curEvent.spawnRate.x, curEvent.spawnRate.y));
+
+        TriggerEvent();
     }
+
+    public void TriggerEvent()
+    {
+        StopCoroutine(PerformEvent());
+        curEventObject = Instantiate(curEvent.eventPrefab, spawnPositions[Random.Range(0, spawnPositions.Length)].position, curEvent.eventPrefab.transform.rotation);
+
+        curEvent = events[Random.Range(0, events.Length)];
+        StartCoroutine(PerformEvent());
+    }
+
 }

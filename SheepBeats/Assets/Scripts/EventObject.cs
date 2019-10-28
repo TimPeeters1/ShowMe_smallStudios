@@ -37,8 +37,21 @@ public class EventObject : MonoBehaviour
     {
         if (other.GetComponentInParent<Rigidbody>())
         {
-            other.GetComponentInParent<Rigidbody>().isKinematic = false;
-            other.GetComponentInParent<Rigidbody>().AddForce(Vector3.up * 100);
+            if (other.GetComponentInParent<Sheep>() != null)
+            {
+                StartCoroutine(GameManager.Instance.GameOver());
+            }
+            else if (other.GetComponentInParent<Fence>() != null)
+            {
+            }
+            else
+            {
+                other.GetComponentInParent<Rigidbody>().isKinematic = false;
+                other.GetComponentInParent<Rigidbody>().AddForce(Vector3.up * 30f, ForceMode.Impulse);
+                other.GetComponentInParent<Rigidbody>().AddForce(transform.forward * 5f, ForceMode.Impulse);
+                Destroy(other.transform.parent.gameObject, 1.5f);
+            }
+        }
         }
     }
-}
+
