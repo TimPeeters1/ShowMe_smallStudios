@@ -1,9 +1,29 @@
 fileFormatVersion: 2
-guid: 684c48240e00dcf409ea2b8c42fe6c32
+guid: 76dc625b537616d4ca669b81d77866fc
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: snowmanBODY
+    second: {fileID: 2100000, guid: 6e9c992ab83e6cc4e946aa7ac919e1cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: snowmanNose
+    second: {fileID: 2100000, guid: f2d01901d2478294e825117684d4b9fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: snowmanRock
+    second: {fileID: 2100000, guid: 9fe22aade68d8d5409891f3947271d54, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: snowmanStick
+    second: {fileID: 2100000, guid: 4ccc532230f0c7a44ab81969a42e0035, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -34,7 +54,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.4
+    globalScale: 0.7
     meshCompression: 0
     addColliders: 1
     useSRGBMaterialColor: 1
@@ -81,7 +101,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.4
+    globalScale: 0.7
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
