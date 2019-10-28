@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<Rigidbody>().AddForce(Vector3.up * 10f, ForceMode.Impulse);
         player.GetComponent<Rigidbody>().AddForce(-Vector3.right * 5f, ForceMode.Impulse);
         player.GetComponent<Rigidbody>().AddTorque(Vector3.forward * 10f, ForceMode.Impulse);
+        player.GetComponent<Rigidbody>().AddTorque(Vector3.right * 3f, ForceMode.Impulse);
 
         //Destroy(player.gameObject, 2);
 
