@@ -475,6 +475,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8652304204499886031}
+  - component: {fileID: 8238258727497475054}
+  - component: {fileID: 2959735077420769283}
+  - component: {fileID: 6883620176859979}
   m_Layer: 0
   m_Name: Palmtree_01
   m_TagString: Untagged
@@ -501,3 +504,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &8238258727497475054
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5640882837860347356}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -1306846023933377809, guid: 05a2f76f39d4e5142a54e9c2b3328547, type: 3}
+--- !u!65 &2959735077420769283
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5640882837860347356}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2, y: 8.21, z: 1.2}
+  m_Center: {x: 0, y: 3.8726757, z: 0}
+--- !u!65 &6883620176859979
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5640882837860347356}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.93, y: 1.52, z: 8.04}
+  m_Center: {x: 0, y: 7.72, z: 0}
