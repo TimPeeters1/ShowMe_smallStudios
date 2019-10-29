@@ -23,7 +23,7 @@ public class EventObject : MonoBehaviour
     {
         TargetDir = player.transform.position - transform.position;
         
-        Vector3 rotateDir = Vector3.RotateTowards(transform.forward, TargetDir, Time.deltaTime, 0.0f);
+        Vector3 rotateDir = Vector3.RotateTowards(transform.forward, TargetDir, Time.deltaTime, 0.0f * 4f);
 
         rotateDir = new Vector3(rotateDir.x, 0, rotateDir.z);
         Debug.DrawRay(transform.position, rotateDir, Color.blue);
@@ -40,9 +40,6 @@ public class EventObject : MonoBehaviour
             if (other.GetComponentInParent<Sheep>() != null)
             {
                 StartCoroutine(GameManager.Instance.GameOver());
-            }
-            else if (other.GetComponentInParent<Fence>() != null)
-            {
             }
             else
             {

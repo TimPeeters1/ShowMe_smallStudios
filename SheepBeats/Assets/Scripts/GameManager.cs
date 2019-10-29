@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(DragScript))]
 public class GameManager : MonoBehaviour
 {
     #region Singleton
@@ -49,10 +50,15 @@ public class GameManager : MonoBehaviour
     [HideInInspector] int highscore;
 
     GameObject mainCam;
+    DragScript dragScript;
 
     bool isTouching = false;
     bool canJump;
 
+    [Space]
+    [SerializeField] bool jumpPending;
+
+    [SerializeField] float timerValue;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +66,8 @@ public class GameManager : MonoBehaviour
 
         highscore = PlayerPrefs.GetInt("Highscore", highscore);
         player = SpawnSheep();
+
+        dragScript = GetComponent<DragScript>();
 
         mainCam = Camera.main.gameObject;
         mainCam.GetComponent<Cinemachine.CinemachineVirtualCamera>().Follow = player.gameObject.transform;
@@ -73,23 +81,53 @@ public class GameManager : MonoBehaviour
         }
 
         gameOverScreen.SetActive(false);
+
+
+    }
+
+    IEnumerator Timer()
+    {
+        while (Input.touchCount > 0)
+        {
+            timerValue++;
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 
     void Update()
     {
-        if (Input.touchCount > 0 && !isTouching || isDebug && Input.GetKeyDown(KeyCode.Space))
+        if (Input.touchCount > 0 && !isTouching|| isDebug && Input.GetKey(KeyCode.Space))
         {
+            StartCoroutine(Timer());
             isTouching = true;
+        }
 
-            if (player.isGrounded())
+        if(Input.touchCount > 0 && isTouching)
+        {
+            if (timerValue <= 8)
             {
-                player.DoJump();
+                jumpPending = true;
+            }
+            else
+            {
+                jumpPending = false;
+                dragScript.enabled = true;
             }
         }
 
         if (Input.touchCount == 0 || isDebug && Input.GetKeyUp(KeyCode.Space))
         {
+            if (jumpPending && player.isGrounded())
+            {
+                player.DoJump();
+                jumpPending = false;
+            }
+
+            dragScript.enabled = false;
+
             isTouching = false;
+            timerValue = 0;
+            //StopCoroutine(Timer());
         }
 
         scoreText.text = currentscore.ToString();

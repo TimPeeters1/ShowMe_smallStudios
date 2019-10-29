@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TouchWegYeetScript : MonoBehaviour
+public class DragScript : MonoBehaviour
 {
  
     private Vector3 mOffset;
@@ -13,6 +13,11 @@ public class TouchWegYeetScript : MonoBehaviour
     public float CustomMass = 1f;
     public float ForceToAdd = 1f;
     Touch touchOne;
+
+    private void OnEnable()
+    {
+        currentObject = null;
+    }
 
     Ray GenerateTouchray()
     {
@@ -30,7 +35,6 @@ public class TouchWegYeetScript : MonoBehaviour
     {
         if (Input.touchCount > 0 && currentObject == null)
         {
-            Debug.Log(touchOne);
             Ray touchRay = GenerateTouchray();
             RaycastHit hit;
             if (Physics.Raycast(touchRay.origin, touchRay.direction, out hit))
@@ -47,7 +51,13 @@ public class TouchWegYeetScript : MonoBehaviour
         }
         else if (Input.touchCount > 0 && currentObject)
         {
-            currentObject.AddComponent<Rigidbody>();
+            if(GetComponent<Rigidbody>() != null)
+            { }
+            else
+            {
+                currentObject.AddComponent<Rigidbody>();
+            }
+
             currentObject.GetComponent<Rigidbody>().mass = CustomMass;
             currentObject.GetComponent<Rigidbody>().isKinematic = false;
             currentObject.transform.position = GetTouchAsWorldPoint() + mOffset;
@@ -71,4 +81,6 @@ public class TouchWegYeetScript : MonoBehaviour
         // Convert it to world points
         return Camera.main.ScreenToWorldPoint(touchPoint);
     }
+
+    
 }
