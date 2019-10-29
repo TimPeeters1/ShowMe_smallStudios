@@ -7,9 +7,9 @@ public class Train : MonoBehaviour
 {
     public float Speed = 1f;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.GetComponentInParent<Sheep>())
+        if (other.gameObject.GetComponentInParent<Sheep>())
         {
             StartCoroutine(GameManager.Instance.GameOver());
         }
