@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5081950269198277026}
   - component: {fileID: 1565633860594066779}
   - component: {fileID: 6804429932677095312}
+  - component: {fileID: 6861998301181907029}
   m_Layer: 0
   m_Name: Seashell
   m_TagString: Untagged
@@ -93,3 +94,15 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: -7450625414827803601, guid: a4a5bff567aff73489b7ee72e73631f4, type: 3}
+--- !u!114 &6861998301181907029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974723379285873031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356b974df317b254186abeccd1dfa0e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

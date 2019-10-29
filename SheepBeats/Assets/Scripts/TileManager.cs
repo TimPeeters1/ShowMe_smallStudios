@@ -16,6 +16,8 @@ public class TileManager : MonoBehaviour
     [Header("Biome Options/Info")]
     [SerializeField] double tileNumber;
     [SerializeField] Biome[] biomes;
+
+    [Space]
     [SerializeField] Biome currentBiome;
 
     int curBiomeTile;
@@ -44,7 +46,7 @@ public class TileManager : MonoBehaviour
     {
         activeTiles = new List<GameObject>();
         spawnTransform = transform;
-        h = spawnTransform.position.x;
+        h = spawnTransform.position.x + tileLength;
         h -= tileOnScreenAmount * tileLength - 1;
 
         for (int i = 0; i < tileOnScreenAmount; i++)
@@ -64,7 +66,7 @@ public class TileManager : MonoBehaviour
     void Update()
     {
         //Debug.Log(activeTiles[activeTiles.Count - 1].transform.position.x);
-        if (activeTiles[activeTiles.Count - 1].transform.position.x <= 26)
+        if (activeTiles[activeTiles.Count - 1].transform.position.x <= 25.5f)
         {
             SpawnTile();
             tileNumber++;

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7495684027023046184}
   - component: {fileID: 7495684027023046185}
   - component: {fileID: 652248854}
+  - component: {fileID: 1252733888}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Untagged
@@ -62,6 +63,19 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!65 &1252733888
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495684027023046187}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 3.313279, z: 6}
+  m_Center: {x: 0.0804968, y: 1.5846275, z: -0.21428445}
 --- !u!1 &8812822782616900304
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,10 +14,7 @@ public class DragScript : MonoBehaviour
     public float ForceToAdd = 1f;
     Touch touchOne;
 
-    private void OnEnable()
-    {
-        currentObject = null;
-    }
+    RaycastHit hit;
 
     Ray GenerateTouchray()
     {
@@ -33,27 +30,30 @@ public class DragScript : MonoBehaviour
 
     void Update()
     {
+        
         if (Input.touchCount > 0 && currentObject == null)
         {
             Ray touchRay = GenerateTouchray();
-            RaycastHit hit;
-            if (Physics.Raycast(touchRay.origin, touchRay.direction, out hit))
+            Debug.DrawRay(touchRay.origin, touchRay.direction * 100f, Color.red);
+
+            if (Physics.Raycast(touchRay.origin, touchRay.direction, out hit) && hit.transform.GetComponent<IsDraggable>())
             {
                 //currentObject = hit.transform.gameObject.GetComponentInParent<IsDraggable>().gameObject;
                 currentObject = hit.transform.gameObject;
                 hitPoint = hit.point;
-                Debug.Log(currentObject);
-            }
 
-            mZCoord = Camera.main.WorldToScreenPoint(currentObject.transform.position).z;
-            // Store offset = gameobject world pos - mouse world pos
-            mOffset = currentObject.transform.position - GetTouchAsWorldPoint();
+                hit.collider.enabled = false;
+                Debug.Log(hit.collider.name);
+
+                mZCoord = Camera.main.WorldToScreenPoint(currentObject.transform.position).z;
+                // Store offset = gameobject world pos - mouse world pos
+                mOffset = currentObject.transform.position - GetTouchAsWorldPoint();
+            }
         }
         else if (Input.touchCount > 0 && currentObject)
         {
-            if(GetComponent<Rigidbody>() != null)
-            { }
-            else
+
+            if (currentObject.GetComponent<Rigidbody>() == null)
             {
                 currentObject.AddComponent<Rigidbody>();
             }
@@ -62,7 +62,8 @@ public class DragScript : MonoBehaviour
             currentObject.GetComponent<Rigidbody>().isKinematic = false;
             currentObject.transform.position = GetTouchAsWorldPoint() + mOffset;
         }
-        else if (Input.touchCount == 0 && currentObject)
+
+        if (Input.touchCount == 0 && currentObject)
         {
             releasePoint = currentObject.transform.position;
             currentObject.GetComponent<Rigidbody>().AddForce((releasePoint - hitPoint) * ForceToAdd);

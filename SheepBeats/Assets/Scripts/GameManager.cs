@@ -55,15 +55,10 @@ public class GameManager : MonoBehaviour
     bool isTouching = false;
     bool canJump;
 
-    [Space]
-    [SerializeField] bool jumpPending;
-
-    [SerializeField] float timerValue;
 
     // Start is called before the first frame update
     void Start()
     {
-
         highscore = PlayerPrefs.GetInt("Highscore", highscore);
         player = SpawnSheep();
 
@@ -81,53 +76,25 @@ public class GameManager : MonoBehaviour
         }
 
         gameOverScreen.SetActive(false);
-
-
-    }
-
-    IEnumerator Timer()
-    {
-        while (Input.touchCount > 0)
-        {
-            timerValue++;
-            yield return new WaitForSeconds(0.01f);
-        }
     }
 
     void Update()
     {
-        if (Input.touchCount > 0 && !isTouching|| isDebug && Input.GetKey(KeyCode.Space))
+        if (Input.touchCount > 0 && !isTouching || isDebug && Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(Timer());
             isTouching = true;
-        }
+            
 
-        if(Input.touchCount > 0 && isTouching)
-        {
-            if (timerValue <= 8)
+            //TODO Fix jump whilst dragging.
+            if (player.isGrounded() && dragScript.currentObject == null)
             {
-                jumpPending = true;
-            }
-            else
-            {
-                jumpPending = false;
-                dragScript.enabled = true;
+                player.DoJump();
             }
         }
 
         if (Input.touchCount == 0 || isDebug && Input.GetKeyUp(KeyCode.Space))
         {
-            if (jumpPending && player.isGrounded())
-            {
-                player.DoJump();
-                jumpPending = false;
-            }
-
-            dragScript.enabled = false;
-
             isTouching = false;
-            timerValue = 0;
-            //StopCoroutine(Timer());
         }
 
         scoreText.text = currentscore.ToString();
@@ -155,7 +122,7 @@ public class GameManager : MonoBehaviour
 
         tileMoveSpeed = 0;
 
-        player.GetComponentInChildren<Animator>().enabled = false;
+        player.GetComponentInChildren<Animator>().enabled = false;  
 
         player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         player.GetComponent<Rigidbody>().AddForce(Vector3.up * 10f, ForceMode.Impulse);
@@ -176,4 +143,6 @@ public class GameManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
+
+
 }

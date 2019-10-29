@@ -103,6 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1657588955234937723}
   - component: {fileID: 4269277549398009688}
+  - component: {fileID: 6225166734035075528}
   m_Layer: 0
   m_Name: Beach_Umbrella
   m_TagString: Untagged
@@ -140,6 +141,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: -3870288679329893500, guid: 9d3954ba372cdf3418f6f105fbb97ba5, type: 3}
+--- !u!114 &6225166734035075528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2403701226437171560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356b974df317b254186abeccd1dfa0e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7539189372774096302
 GameObject:
   m_ObjectHideFlags: 0

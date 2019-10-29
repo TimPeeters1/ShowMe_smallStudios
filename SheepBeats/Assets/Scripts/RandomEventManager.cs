@@ -31,7 +31,6 @@ public class RandomEventManager : MonoBehaviour
 
     public void TriggerEvent()
     {
-        Debug.Log("Triggered Event");
         StopCoroutine(PerformEvent());
         curEventObject = Instantiate(curEvent.eventPrefab, spawnPositions[Random.Range(0, spawnPositions.Length)].position, curEvent.eventPrefab.transform.rotation);
 

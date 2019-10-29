@@ -478,6 +478,7 @@ GameObject:
   - component: {fileID: 8238258727497475054}
   - component: {fileID: 2959735077420769283}
   - component: {fileID: 6883620176859979}
+  - component: {fileID: -1105670005327349125}
   m_Layer: 0
   m_Name: Palmtree_01
   m_TagString: Untagged
@@ -544,3 +545,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 7.93, y: 1.52, z: 8.04}
   m_Center: {x: 0, y: 7.72, z: 0}
+--- !u!114 &-1105670005327349125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5640882837860347356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356b974df317b254186abeccd1dfa0e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

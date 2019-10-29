@@ -41,6 +41,10 @@ public class EventObject : MonoBehaviour
             {
                 StartCoroutine(GameManager.Instance.GameOver());
             }
+            else if (other.GetComponentInParent<EventObject>() != null)
+            {
+                //DO nothing
+            }
             else
             {
                 other.GetComponentInParent<Rigidbody>().isKinematic = false;

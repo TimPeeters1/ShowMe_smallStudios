@@ -53,6 +53,7 @@ public class Sheep : MonoBehaviour
 
     public void DoJump()
     {
+        Debug.Log("DoJump");
         isJumping = true;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         
