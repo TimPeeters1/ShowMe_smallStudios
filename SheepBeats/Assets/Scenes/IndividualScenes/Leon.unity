@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -971,7 +971,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &814782808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1070,6 +1070,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1328100447427145892, guid: d18fcb769f1711840b693866756d2fb8,
         type: 3}
+      propertyPath: biomes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1328100447427145892, guid: d18fcb769f1711840b693866756d2fb8,
+        type: 3}
       propertyPath: tileLength
       value: 35
       objectReference: {fileID: 0}
@@ -1078,6 +1083,30 @@ PrefabInstance:
       propertyPath: tileOnScreenAmount
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1328100447427145892, guid: d18fcb769f1711840b693866756d2fb8,
+        type: 3}
+      propertyPath: biomes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9833affbd8666a84ca33f6eb38d6024b,
+        type: 2}
+    - target: {fileID: 1328100447427145892, guid: d18fcb769f1711840b693866756d2fb8,
+        type: 3}
+      propertyPath: currentBiome
+      value: 
+      objectReference: {fileID: 11400000, guid: 9833affbd8666a84ca33f6eb38d6024b,
+        type: 2}
+    - target: {fileID: 1328100447427145892, guid: d18fcb769f1711840b693866756d2fb8,
+        type: 3}
+      propertyPath: biomes.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 83b0b240e6a004146a5f6172cf421828,
+        type: 2}
+    - target: {fileID: 1328100447427145892, guid: d18fcb769f1711840b693866756d2fb8,
+        type: 3}
+      propertyPath: biomes.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5a9d4622060f74d45a3fd8272ae3068c,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d18fcb769f1711840b693866756d2fb8, type: 3}
 --- !u!1 &881318246
@@ -1172,7 +1201,7 @@ MonoBehaviour:
   prefab: {fileID: 6967281728574224490, guid: 3ad86f34970881a4a8c3c7ce980e9e4b, type: 3}
   player: {fileID: 0}
   spawnPosition: {fileID: 1719265378}
-  tileMoveSpeed: 0
+  tileMoveSpeed: 0.25
   moveMultiplier: 0.001
   scoreText: {fileID: 1846580468}
   highscoreText: {fileID: 498630062}
