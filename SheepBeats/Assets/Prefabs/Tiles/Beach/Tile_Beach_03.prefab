@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4d3547000757e32449917ee288c0c778, type: 2}
+  - {fileID: 2100000, guid: 9b09a31f665836140977b6d731d937be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -544,6 +544,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6192670768726207405, guid: 7c517f54cbb2d164b94763bc0514085b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9b09a31f665836140977b6d731d937be, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c517f54cbb2d164b94763bc0514085b, type: 3}
 --- !u!4 &136935833559695490 stripped
@@ -624,6 +629,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 4.983792
       objectReference: {fileID: 0}
+    - target: {fileID: 7244524126648096152, guid: cd31ddce81c809c459ffe9d9ae326120,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9b09a31f665836140977b6d731d937be, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd31ddce81c809c459ffe9d9ae326120, type: 3}
 --- !u!4 &4806727940131356345 stripped
@@ -779,12 +789,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3618665549416267392, guid: a0538cf4034016643a1d161868aec185,
-        type: 3}
+    - target: {fileID: 104445667, guid: a0538cf4034016643a1d161868aec185, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
-    - target: {fileID: 104445667, guid: a0538cf4034016643a1d161868aec185, type: 3}
+    - target: {fileID: 3618665549416267392, guid: a0538cf4034016643a1d161868aec185,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
@@ -1038,6 +1048,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 8.811825
       objectReference: {fileID: 0}
+    - target: {fileID: 7244524126648096152, guid: cd31ddce81c809c459ffe9d9ae326120,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9b09a31f665836140977b6d731d937be, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd31ddce81c809c459ffe9d9ae326120, type: 3}
 --- !u!4 &3435355642967584942 stripped
