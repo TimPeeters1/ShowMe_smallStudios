@@ -56,7 +56,7 @@ public class SheepOld : MonoBehaviour
     {
         if (!doHop && !isJumping)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.up * 15f, ForceMode.Impulse);
+            GetComponent<Rigidbody>().AddForce(Vector3.up * Random.Range(10f, 12f), ForceMode.Impulse);
             doHop = true;
         }
 

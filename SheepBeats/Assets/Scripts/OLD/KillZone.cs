@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class KillZone : MonoBehaviour
 {
+    MenuSpawner mgr;
+
+    private void Start()
+    {
+        mgr = FindObjectOfType<MenuSpawner>();
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Sheep>())
+        if (other.GetComponentInParent<SheepOld>())
         {
-            GameManagerOld.Instance.activeSheeps.Remove(other.GetComponent<SheepOld>());
+            mgr.activeSheeps.Remove(other.GetComponentInParent<SheepOld>());
             Destroy(other.gameObject);
         }
     }

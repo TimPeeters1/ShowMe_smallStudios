@@ -74,7 +74,7 @@ public class GameManagerOld : MonoBehaviour
 
         //InvokeRepeating("UpdateRow", 0f, walkInterval);
 
-        fpsCounter.gameObject.SetActive(false);
+        //fpsCounter.gameObject.SetActive(false);
 
         if (isDebug)
         {
@@ -100,7 +100,7 @@ public class GameManagerOld : MonoBehaviour
             isTouching = false;
         }
 
-        scoreText.text = currentScore.ToString();
+        //scoreText.text = currentScore.ToString();
 
         if (isDebug)
         {
