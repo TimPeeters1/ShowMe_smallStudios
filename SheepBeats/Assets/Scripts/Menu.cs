@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
-    int Main;
+    int Main = 1;
 
     public void LoadMainLevel()
     {

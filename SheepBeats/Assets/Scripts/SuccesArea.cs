@@ -16,6 +16,8 @@ public class SuccesArea : MonoBehaviour
             GameManager.Instance.currentscore++;
 
             GameManager.Instance.tileMoveSpeed += GameManager.Instance.moveMultiplier;
+
+            other.GetComponentInParent<Sheep>().moveDown();
         }
     }
 

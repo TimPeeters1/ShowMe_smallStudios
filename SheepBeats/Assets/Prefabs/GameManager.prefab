@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8559868635977883874}
   - component: {fileID: 8559868635977883869}
-  - component: {fileID: 8559868635977883868}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,7 +47,7 @@ MonoBehaviour:
   player: {fileID: 0}
   spawnPosition: {fileID: 0}
   tileMoveSpeed: 0.25
-  moveMultiplier: 0.001
+  moveMultiplier: 0.005
   scoreText: {fileID: 0}
   highscoreText: {fileID: 0}
   gameOverScreen: {fileID: 0}
@@ -56,20 +55,7 @@ MonoBehaviour:
   isDebug: 1
   fpsCounter: {fileID: 0}
   currentscore: 0
-  jumpPending: 0
-  timerValue: 0
---- !u!114 &8559868635977883868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8559868635977883875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0740f600b25a7814385313451f83cf91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  canJump: 0
   currentObject: {fileID: 0}
   CustomMass: 1
   ForceToAdd: 1

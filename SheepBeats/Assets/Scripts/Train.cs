@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class Train : MonoBehaviour
+public class Train : MonoBehaviour, IEvent
 {
     public float Speed = 1f;
+
+    public void DisableEvent()
+    {
+        Destroy(this.gameObject, 5);
+    }
 
     private void OnCollisionEnter(Collision other)
     {
@@ -17,6 +22,6 @@ public class Train : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(0, 0, Speed);
+        transform.position += new Vector3(0, 0, Speed * GameManager.Instance.tileMoveSpeed);
     }
 }

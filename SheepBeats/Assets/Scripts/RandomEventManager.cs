@@ -7,6 +7,7 @@ public class RandomEventManager : MonoBehaviour
     [SerializeField] Transform[] spawnPositions;
 
     [SerializeField] RandomEvent[] events;
+    [Space]
     [SerializeField] RandomEvent curEvent;
 
     [Space]

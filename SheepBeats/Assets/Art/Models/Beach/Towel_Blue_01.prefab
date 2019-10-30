@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2849722483867708954}
   - component: {fileID: 8408421626540659427}
   - component: {fileID: 4567980023115655208}
-  - component: {fileID: 582524223099664178}
   m_Layer: 0
   m_Name: Towel_Blue_01
   m_TagString: Untagged
@@ -95,15 +94,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: -5466470081548511365, guid: 93c2e85fedaadba469d6ce8b0bae439b, type: 3}
---- !u!114 &582524223099664178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7821733201817708095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 356b974df317b254186abeccd1dfa0e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

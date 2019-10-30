@@ -34,7 +34,7 @@ public class DragScript : MonoBehaviour
         if (Input.touchCount > 0 && currentObject == null)
         {
             Ray touchRay = GenerateTouchray();
-            Debug.DrawRay(touchRay.origin, touchRay.direction * 100f, Color.red);
+            //Debug.DrawRay(touchRay.origin, touchRay.direction * 100f, Color.red);
 
             if (Physics.Raycast(touchRay.origin, touchRay.direction, out hit) && hit.transform.GetComponent<IsDraggable>())
             {
@@ -42,8 +42,8 @@ public class DragScript : MonoBehaviour
                 currentObject = hit.transform.gameObject;
                 hitPoint = hit.point;
 
-                hit.collider.enabled = false;
-                Debug.Log(hit.collider.name);
+                
+                hit.transform.gameObject.GetComponentInParent<Collider>().enabled = false;
 
                 mZCoord = Camera.main.WorldToScreenPoint(currentObject.transform.position).z;
                 // Store offset = gameobject world pos - mouse world pos

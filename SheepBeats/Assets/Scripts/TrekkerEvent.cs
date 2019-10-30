@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrekkerEvent : MonoBehaviour
+public class TrekkerEvent : MonoBehaviour, IEvent
 {
     public float speed;
 
@@ -22,7 +22,7 @@ public class TrekkerEvent : MonoBehaviour
     void MoveTarget()
     {
         TargetDir = player.transform.position - transform.position;
-        
+
         Vector3 rotateDir = Vector3.RotateTowards(transform.forward, TargetDir, Time.deltaTime, 0.0f * 4f);
 
         rotateDir = new Vector3(rotateDir.x, 0, rotateDir.z);
@@ -30,7 +30,7 @@ public class TrekkerEvent : MonoBehaviour
 
         transform.rotation = Quaternion.LookRotation(rotateDir);
 
-        transform.position += transform.forward * speed * 0.1f;
+        transform.position += transform.forward * speed * GameManager.Instance.tileMoveSpeed * 0.8f;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -47,12 +47,19 @@ public class TrekkerEvent : MonoBehaviour
             }
             else
             {
-                other.GetComponentInParent<Rigidbody>().isKinematic = false;
-                other.GetComponentInParent<Rigidbody>().AddForce(Vector3.up * 30f, ForceMode.Impulse);
-                other.GetComponentInParent<Rigidbody>().AddForce(transform.forward * 5f, ForceMode.Impulse);
+                other.GetComponent<Rigidbody>().isKinematic = false;
+                other.GetComponent<Rigidbody>().AddForce(Vector3.up * 30f, ForceMode.Impulse);
+                other.GetComponent<Rigidbody>().AddForce(transform.forward * 5f, ForceMode.Impulse);
                 Destroy(other.transform.parent.gameObject, 1.5f);
             }
         }
-        }
     }
+
+    public void DisableEvent()
+    {
+        GetComponent<Rigidbody>().AddTorque(Vector3.forward * 10f, ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddTorque(Vector3.right * 3f, ForceMode.Impulse);
+        Destroy(this.gameObject, 5);
+    }
+}
 

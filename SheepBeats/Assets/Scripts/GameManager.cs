@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(DragScript))]
 public class GameManager : MonoBehaviour
 {
     #region Singleton
@@ -53,10 +52,41 @@ public class GameManager : MonoBehaviour
     DragScript dragScript;
 
     bool isTouching = false;
-    bool canJump;
+    public bool canJump;
 
+    [Space]
+    //Dragscript variables
+    private Vector3 mOffset;
+    private Vector3 hitPoint;
+    private Vector3 releasePoint;
+    private float mZCoord;
+    private GameObject currentObject;
+    public float CustomMass = 1f;
+    public float ForceToAdd = 1f;
+    Touch touchOne;
 
-    // Start is called before the first frame update
+    Ray GenerateTouchray()
+    {
+        Touch touch = Input.GetTouch(0);
+        Vector3 touchPosFar = new Vector3(touch.position.x, touch.position.y, Camera.main.farClipPlane);
+        Vector3 touchPosNear = new Vector3(touch.position.x, touch.position.y, Camera.main.nearClipPlane);
+        Vector3 touchPosF = Camera.main.ScreenToWorldPoint(touchPosFar);
+        Vector3 touchPosN = Camera.main.ScreenToWorldPoint(touchPosNear);
+
+        Ray mr = new Ray(touchPosN, touchPosF - touchPosN);
+        return mr;
+    }
+    private Vector3 GetTouchAsWorldPoint()
+    {
+        Touch touch = Input.GetTouch(0);
+        // Pixel coordinates of mouse (x,y)
+        Vector3 touchPoint = touch.position;
+        // z coordinate of game object on screen
+        touchPoint.z = mZCoord;
+        // Convert it to world points
+        return Camera.main.ScreenToWorldPoint(touchPoint);
+    }
+
     void Start()
     {
         highscore = PlayerPrefs.GetInt("Highscore", highscore);
@@ -76,6 +106,7 @@ public class GameManager : MonoBehaviour
         }
 
         gameOverScreen.SetActive(false);
+        canJump = true;
     }
 
     void Update()
@@ -83,18 +114,61 @@ public class GameManager : MonoBehaviour
         if (Input.touchCount > 0 && !isTouching || isDebug && Input.GetKeyDown(KeyCode.Space))
         {
             isTouching = true;
-            
 
-            //TODO Fix jump whilst dragging.
-            if (player.isGrounded() && dragScript.currentObject == null)
+            Ray touchRay = GenerateTouchray();
+            RaycastHit hit;
+            //Debug.DrawRay(touchRay.origin, touchRay.direction * 100f, Color.red);
+
+            if (Physics.Raycast(touchRay.origin, touchRay.direction, out hit))
             {
-                player.DoJump();
+                if (hit.transform.GetComponent<IsDraggable>())
+                {
+                    currentObject = hit.transform.gameObject;
+                    hitPoint = hit.point;
+
+                    hit.collider.enabled = false;
+
+                    mZCoord = Camera.main.WorldToScreenPoint(currentObject.transform.position).z;
+                    mOffset = currentObject.transform.position - GetTouchAsWorldPoint();
+                }
+                else
+                {
+                    if (player.isGrounded())
+                    {
+                        player.DoJump();
+                    }
+                }
             }
+        }
+
+        if (Input.touchCount > 0 && currentObject)
+        {
+            if (currentObject.GetComponent<Rigidbody>() == null)
+            {
+                currentObject.AddComponent<Rigidbody>();
+            }
+
+            currentObject.GetComponent<Rigidbody>().mass = CustomMass;
+            currentObject.GetComponent<Rigidbody>().isKinematic = false;
+            currentObject.transform.position = GetTouchAsWorldPoint() + mOffset;
+
         }
 
         if (Input.touchCount == 0 || isDebug && Input.GetKeyUp(KeyCode.Space))
         {
             isTouching = false;
+
+            if (currentObject)
+            {
+                currentObject.GetComponent<IEvent>().DisableEvent();
+
+                releasePoint = currentObject.transform.position;
+                currentObject.GetComponent<Rigidbody>().AddForce((releasePoint - hitPoint) * ForceToAdd);
+                currentObject = null;
+
+            }
+
+           
         }
 
         scoreText.text = currentscore.ToString();
@@ -122,7 +196,7 @@ public class GameManager : MonoBehaviour
 
         tileMoveSpeed = 0;
 
-        player.GetComponentInChildren<Animator>().enabled = false;  
+        player.GetComponentInChildren<Animator>().enabled = false;
 
         player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         player.GetComponent<Rigidbody>().AddForce(Vector3.up * 10f, ForceMode.Impulse);

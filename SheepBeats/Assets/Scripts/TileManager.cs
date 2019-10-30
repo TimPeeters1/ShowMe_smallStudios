@@ -51,7 +51,7 @@ public class TileManager : MonoBehaviour
 
         for (int i = 0; i < tileOnScreenAmount; i++)
         {
-            SpawnTileStart(new Vector3(h, 0, 0));
+            SpawnTileStart(new Vector3(h, 0.01f, 0));
             h += tileLength;
         }
         
@@ -66,7 +66,7 @@ public class TileManager : MonoBehaviour
     void Update()
     {
         //Debug.Log(activeTiles[activeTiles.Count - 1].transform.position.x);
-        if (activeTiles[activeTiles.Count - 1].transform.position.x <= 25.5f)
+        if (activeTiles[activeTiles.Count - 1].transform.position.x <= 26f)
         {
             SpawnTile();
             tileNumber++;
@@ -86,6 +86,7 @@ public class TileManager : MonoBehaviour
             //currentBiome = biomes[RandomPrefabIndex()];
 
             curBiomeTile = 0;
+
         }
     }
 

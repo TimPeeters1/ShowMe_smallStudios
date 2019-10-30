@@ -53,17 +53,21 @@ public class Sheep : MonoBehaviour
 
     public void DoJump()
     {
-        Debug.Log("DoJump");
         isJumping = true;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         
         if (inRange)
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.up * 30f, ForceMode.Impulse);
+            GetComponent<Rigidbody>().AddForce(Vector3.up * 25, ForceMode.Impulse);
         }
         else
         {
-            GetComponent<Rigidbody>().AddForce(Vector3.up * 25f, ForceMode.Impulse);
+            GetComponent<Rigidbody>().AddForce(Vector3.up * 22f, ForceMode.Impulse);
         }
+    }
+
+    public void moveDown()
+    {
+        GetComponent<Rigidbody>().AddForce(-Vector3.up * 5f, ForceMode.Impulse);
     }
 }

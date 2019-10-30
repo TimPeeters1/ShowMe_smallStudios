@@ -9,17 +9,17 @@ public class JumpArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Sheep>())
+        if (other.GetComponentInParent<Sheep>())
         {
-            other.GetComponent<Sheep>().inRange = true;
+            other.GetComponentInParent<Sheep>().inRange = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<Sheep>())
+        if (other.GetComponentInParent<Sheep>())
         {
-            other.GetComponent<Sheep>().inRange = false;
+            other.GetComponentInParent<Sheep>().inRange = false;
         }
     }
 
