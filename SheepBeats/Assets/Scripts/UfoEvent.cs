@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrekkerEvent : MonoBehaviour
+public class UfoEvent : MonoBehaviour
 {
     public float speed;
+
+    [SerializeField] float distance;
 
     GameObject player;
     Vector3 TargetDir;
@@ -16,17 +18,21 @@ public class TrekkerEvent : MonoBehaviour
 
     private void Update()
     {
+        distance = Vector3.Distance(player.transform.position, transform.position);
+
         MoveTarget();
     }
 
     void MoveTarget()
     {
+        transform.GetChild(0).Rotate(0, 15f * Time.deltaTime, 0);
+
         TargetDir = player.transform.position - transform.position;
         
         Vector3 rotateDir = Vector3.RotateTowards(transform.forward, TargetDir, Time.deltaTime, 0.0f * 4f);
 
         rotateDir = new Vector3(rotateDir.x, 0, rotateDir.z);
-        Debug.DrawRay(transform.position, rotateDir, Color.blue);
+        Debug.DrawRay(transform.position, rotateDir * 10f, Color.blue);
 
         transform.rotation = Quaternion.LookRotation(rotateDir);
 
@@ -41,7 +47,7 @@ public class TrekkerEvent : MonoBehaviour
             {
                 StartCoroutine(GameManager.Instance.GameOver());
             }
-            else if (other.GetComponentInParent<TrekkerEvent>() != null)
+            else if (other.GetComponentInParent<UfoEvent>() != null)
             {
                 //DO nothing
             }
